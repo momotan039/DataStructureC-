@@ -1,0 +1,8 @@
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\bin\Debug\mahat-21-A.exe.config
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\bin\Debug\mahat-21-A.exe
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\bin\Debug\mahat-21-A.pdb
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\obj\Debug\mahat-21-A.csproj.AssemblyReference.cache
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\obj\Debug\mahat-21-A.csproj.SuggestedBindingRedirects.cache
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\obj\Debug\mahat-21-A.csproj.CoreCompileInputs.cache
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\obj\Debug\mahat-21-A.exe
+C:\Users\MOHAMMED\source\repos\mahat-21-A\mahat-21-A\obj\Debug\mahat-21-A.pdb
