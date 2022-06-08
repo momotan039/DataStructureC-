@@ -85,7 +85,7 @@ namespace mahat_21_A.Lists
             }
         }
         
-        public static bool IsLeave(BinNode<int> b)
+        public static bool IsLeaf(BinNode<int> b)
         {
             if (b != null)
             {
@@ -99,7 +99,7 @@ namespace mahat_21_A.Lists
             if (b == null)
                 return 0;
 
-            if (IsLeave(b))
+            if (IsLeaf(b))
                 return 1;
             return CountLeaves(b.GetLeft())+CountLeaves(b.GetRight());
         }
@@ -108,7 +108,7 @@ namespace mahat_21_A.Lists
         {
             if (b == null)
                 return 0;
-            if (IsLeave(b))
+            if (IsLeaf(b))
                 return b.GetValue();
             return SumLeaves(b.GetLeft()) + SumLeaves(b.GetRight());
         }
@@ -129,7 +129,7 @@ namespace mahat_21_A.Lists
         }
         public static int CountLeftNodes(BinNode<int> b)
         {
-            if (b == null || IsLeave(b))
+            if (b == null || IsLeaf(b))
                 return 0;
             //if(!b.HasLeft())
             //    return CountLeftNodes(b.GetRight());
@@ -140,7 +140,7 @@ namespace mahat_21_A.Lists
 
         public static int CountRightNodes(BinNode<int> b)
         {
-            if (b == null || IsLeave(b))
+            if (b == null || IsLeaf(b))
                 return 0;
             return 1 + CountRightNodes(b.GetRight());
         }
@@ -148,10 +148,153 @@ namespace mahat_21_A.Lists
         {
             if (b == null)
                 return 0;
-            //if (!b.HasLeft())
-            //    return SumLeftNodes(b.GetRight());
-            return b.GetValue() + SumLeftNodes(b.GetLeft()) + SumLeftNodes(b.GetRight());
+            if (!b.HasLeft())
+                return SumLeftNodes(b.GetRight());
+            Console.WriteLine(b.GetLeft().GetValue());
+            return b.GetLeft().GetValue() + SumLeftNodes(b.GetLeft())
+                + SumLeftNodes(b.GetRight());
+        }
+        public static int SumRightNodes(BinNode<int> b)
+        {
+            if (b == null)
+                return 0;
+            if (!b.HasRight())
+                return SumRightNodes(b.GetLeft());
+            Console.WriteLine(b.GetRight().GetValue());
+            return b.GetRight().GetValue()+SumRightNodes(b.GetLeft())
+                +SumRightNodes(b.GetRight());
+        }
+        public static int SumNodesHaveOneChild(BinNode<int> b)
+        {
+            if (b == null ||  IsLeaf(b))
+                return 0;
+            if (b.HasLeft() && !b.HasRight())
+            {
+                Console.WriteLine(b.GetValue());
+                return 1 + SumNodesHaveOneChild(b.GetLeft());
+            }
+            if (!b.HasLeft() && b.HasRight())
+            {
+                Console.WriteLine(b.GetValue());
+                return 1 + SumNodesHaveOneChild(b.GetRight());
+            }
+
+            return SumNodesHaveOneChild(b.GetRight()) + SumNodesHaveOneChild(b.GetLeft());
+        }
+
+        public static int CountParentsHave2Child(BinNode<int> b)
+        {
+            if(b==null || IsLeaf(b))
+                return 0;
+
+            if (b.HasLeft() && b.HasRight())
+            {
+                Console.WriteLine(b.GetValue());
+                return 1 + CountParentsHave2Child(b.GetLeft())
+                    + CountParentsHave2Child(b.GetRight());
+            }
+
+            return CountParentsHave2Child(b.GetLeft())
+                    + CountParentsHave2Child(b.GetRight());
+        }
+
+        //public static int CountChildByParent(BinNode<int> b,int level)
+        //{
+        //    if (b == null)
+        //        return 0;
+
+        //    if (b == null)
+        //        return 0;
+
+        //}
+
+        public static int CountNodeBiggerThanNum(BinNode<int> b, int num)
+        {
+            if (b == null)
+                return 0;
+
+            if (b.GetValue() > num)
+            {
+                Console.WriteLine(b.GetValue());
+                return 1 + CountNodeBiggerThanNum(b.GetLeft(), num) +
+                    CountNodeBiggerThanNum(b.GetRight(), num);
+            }
+            return CountNodeBiggerThanNum(b.GetLeft(), num) +
+                    CountNodeBiggerThanNum(b.GetRight(), num);
+        }
+
+        public static int CountNodesHave2childBigerBrother(BinNode<int> b)
+        {
+            if (b == null)
+                return 0;
+            if(b.HasLeft() && b.HasRight())
+            {
+                int x = Math.Max(b.GetRight().GetValue(), b.GetLeft().GetValue());
+                return x+
+                    CountNodesHave2childBigerBrother(b.GetLeft()) + CountNodesHave2childBigerBrother(b.GetRight());
+            }
+
+            return CountNodesHave2childBigerBrother(b.GetLeft())+CountNodesHave2childBigerBrother(b.GetRight());
 
         }
+
+        public static int CountNodeleftLeavesBiggerRightLeaves(BinNode<int>b)
+        {
+            if (b == null)
+                return 0;
+            
+            if(CountLeaves(b.GetLeft())> CountLeaves(b.GetRight()))
+            {
+                Console.WriteLine("node:"+b.GetValue());
+                return 1 + CountNodeleftLeavesBiggerRightLeaves(b.GetLeft()) + CountNodeleftLeavesBiggerRightLeaves(b.GetRight());
+            }
+
+            return CountNodeleftLeavesBiggerRightLeaves(b.GetLeft()) + CountNodeleftLeavesBiggerRightLeaves(b.GetRight());
+        }
+        public static bool IsMidurag(BinNode<int> b)
+        {
+            if (b == null)
+                return false;
+
+            if (IsLeaf(b))
+                return true;
+
+            if (!b.HasLeft() || !b.HasRight())
+                return false;
+
+            if(b.GetRight().GetValue()>=b.GetLeft().GetValue()
+                || b.GetLeft().GetValue()+b.GetRight().GetValue()>=b.GetValue())
+                return false;
+
+            return IsMidurag(b.GetLeft()) && IsMidurag(b.GetRight());
+        }
+      public static bool IsSumChildsEqualParent(BinNode<int> b)
+        {
+            if (b == null)
+                return false;
+
+            if (IsLeaf(b))
+                return true;
+
+            if (!b.HasLeft())
+            {
+                Console.WriteLine(b.GetValue()+" hasnt left");
+                return false;
+            }
+            if (!b.HasRight())
+            {
+                Console.WriteLine(b.GetValue() + " hasnt left");
+                return false;
+            }
+
+            if (b.GetLeft().GetValue() + b.GetRight().GetValue() != b.GetValue())
+            {
+                Console.WriteLine(b.GetLeft().GetValue() + " != " + b.GetRight().GetValue());
+                return false;
+            }
+            return IsSumChildsEqualParent(b.GetLeft()) &&
+                IsSumChildsEqualParent(b.GetRight());
+        }
+
     }
 }
