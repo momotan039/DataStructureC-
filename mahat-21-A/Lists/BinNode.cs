@@ -230,7 +230,6 @@ namespace mahat_21_A.Lists
             if(b.HasLeft() && b.HasRight())
             {
                 int x = Math.Max(b.GetRight().GetValue(), b.GetLeft().GetValue());
-                Console.WriteLine(x);
                 return x+
                     CountNodesHave2childBigerBrother(b.GetLeft()) + CountNodesHave2childBigerBrother(b.GetRight());
             }
@@ -243,13 +242,8 @@ namespace mahat_21_A.Lists
         {
             if (b == null)
                 return 0;
-            var ezer1 = b.GetLeft();
-            var ezer2 = b.GetRight();
-            while (ezer1!=null)
-            {
-        
-            }
-            if(cLeaves(b.GetLeft())>cLeaves(b.GetRight()))
+            
+            if(CountLeaves(b.GetLeft())> CountLeaves(b.GetRight()))
             {
                 Console.WriteLine("node:"+b.GetValue());
                 return 1 + fun(b.GetLeft()) + fun(b.GetRight());
@@ -258,17 +252,7 @@ namespace mahat_21_A.Lists
             return fun(b.GetLeft()) + fun(b.GetRight());
         }
 
-        public static int cLeaves(BinNode<int> b)
-        {
-            if (b == null)
-                return 0;
-
-            if(IsLeaf(b))
-                return 1+cLeaves(b.GetLeft())+cLeaves(b.GetRight());
-
-            return cLeaves(b.GetLeft()) + cLeaves(b.GetRight());
-
-        }
+      
 
     }
 }
