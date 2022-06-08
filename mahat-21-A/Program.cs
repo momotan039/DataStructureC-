@@ -44,6 +44,8 @@ namespace mahat_21_A
             Console.WriteLine("Count Right Nodes:" + BinNode<int>.CountRightNodes(bin));
             Console.WriteLine();
             Console.WriteLine("Sum Left Nodes:" + BinNode<int>.SumLeftNodes(bin));
+            Console.WriteLine();
+            Console.WriteLine("Sum Left Nodes:" + BinNode<int>.SumLeftNodes(bin));
 
             Console.ReadKey();
         }
