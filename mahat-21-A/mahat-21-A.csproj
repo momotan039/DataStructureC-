@@ -48,6 +48,7 @@
     <Compile Include="Lists\Queue.cs" />
     <Compile Include="Lists\Stack.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Program2.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Store.cs" />
     <Compile Include="Tablet.cs" />
