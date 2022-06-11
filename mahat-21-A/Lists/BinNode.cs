@@ -238,7 +238,7 @@ namespace mahat_21_A.Lists
 
         }
 
-        public static int fun(BinNode<int>b)
+        public static int CountNodeleftLeavesBiggerRightLeaves(BinNode<int>b)
         {
             if (b == null)
                 return 0;
@@ -246,13 +246,55 @@ namespace mahat_21_A.Lists
             if(CountLeaves(b.GetLeft())> CountLeaves(b.GetRight()))
             {
                 Console.WriteLine("node:"+b.GetValue());
-                return 1 + fun(b.GetLeft()) + fun(b.GetRight());
+                return 1 + CountNodeleftLeavesBiggerRightLeaves(b.GetLeft()) + CountNodeleftLeavesBiggerRightLeaves(b.GetRight());
             }
 
-            return fun(b.GetLeft()) + fun(b.GetRight());
+            return CountNodeleftLeavesBiggerRightLeaves(b.GetLeft()) + CountNodeleftLeavesBiggerRightLeaves(b.GetRight());
         }
+        public static bool IsMidurag(BinNode<int> b)
+        {
+            if (b == null)
+                return false;
 
-      
+            if (IsLeaf(b))
+                return true;
+
+            if (!b.HasLeft() || !b.HasRight())
+                return false;
+
+            if(b.GetRight().GetValue()>=b.GetLeft().GetValue()
+                || b.GetLeft().GetValue()+b.GetRight().GetValue()>=b.GetValue())
+                return false;
+
+            return IsMidurag(b.GetLeft()) && IsMidurag(b.GetRight());
+        }
+      public static bool IsSumChildsEqualParent(BinNode<int> b)
+        {
+            if (b == null)
+                return false;
+
+            if (IsLeaf(b))
+                return true;
+
+            if (!b.HasLeft())
+            {
+                Console.WriteLine(b.GetValue()+" hasnt left");
+                return false;
+            }
+            if (!b.HasRight())
+            {
+                Console.WriteLine(b.GetValue() + " hasnt left");
+                return false;
+            }
+
+            if (b.GetLeft().GetValue() + b.GetRight().GetValue() != b.GetValue())
+            {
+                Console.WriteLine(b.GetLeft().GetValue() + " != " + b.GetRight().GetValue());
+                return false;
+            }
+            return IsSumChildsEqualParent(b.GetLeft()) &&
+                IsSumChildsEqualParent(b.GetRight());
+        }
 
     }
 }
